@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los Almendros · Hole #2 — A Value Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#f6f1e7;
+    --cream:#efe7d6;
+    --paper:#fbf8f1;
+    --forest:#1f3325;
+    --forest-soft:#33503a;
+    --sage:#7d8c6a;
+    --clay:#bd6a43;
+    --gold:#a8853e;
+    --gold-light:#c6a45c;
+    --ink:#2a2620;
+    --muted:#6f6857;
+    --line:rgba(31,51,37,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Jost',sans-serif;
+    background:var(--ivory);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:80px 0 60px;
+    background:
+      radial-gradient(120% 90% at 80% 10%, rgba(168,133,62,0.10), transparent 55%),
+      linear-gradient(160deg,#22382a 0%,#1f3325 45%,#172519 100%);
+    color:var(--ivory);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 9px);
+    opacity:.5;
+  }
+  .fairway{
+    position:absolute;right:-12%;bottom:-18%;
+    width:62%;height:130%;
+    background:radial-gradient(ellipse at center, rgba(125,140,106,0.40), transparent 62%);
+    transform:rotate(-18deg);
+    filter:blur(8px);
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:2}
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--gold-light);font-weight:500;margin-bottom:28px;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(2.6rem,6.5vw,5rem);
+    line-height:1.02;
+    letter-spacing:-.5px;
+    max-width:13ch;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold-light)}
+  .hero .sub{
+    margin-top:30px;max-width:44ch;
+    font-size:1.07rem;font-weight:300;color:rgba(246,241,231,.82);
+  }
+  .hero-meta{
+    margin-top:54px;display:flex;flex-wrap:wrap;gap:0;
+    border-top:1px solid rgba(246,241,231,.18);
+    border-bottom:1px solid rgba(246,241,231,.18);
+  }
+  .hero-meta .cell{
+    padding:22px 34px 22px 0;margin-right:34px;
+    border-right:1px solid rgba(246,241,231,.14);
+  }
+  .hero-meta .cell:last-child{border-right:none;margin-right:0;padding-right:0}
+  .hero-meta .k{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-light);margin-bottom:6px}
+  .hero-meta .v{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:400}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:90px 0}
+  .lead{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(1.5rem,3vw,2.15rem);line-height:1.4;
+    letter-spacing:-.3px;color:var(--forest);max-width:24ch;
+  }
+  .tag{
+    font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--clay);font-weight:600;margin-bottom:20px;
+  }
+  .copy{font-size:1.06rem;color:var(--muted);max-width:58ch}
+  .copy + .copy{margin-top:18px}
+
+  .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  @media(max-width:780px){.intro-grid{grid-template-columns:1fr;gap:28px}}
+
+  /* ---------- THE MATH ---------- */
+  .math{background:var(--paper)}
+  .ledger{
+    margin-top:46px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:4px;
+    box-shadow:0 30px 60px -40px rgba(31,51,37,.45);
+    overflow:hidden;
+  }
+  .ledger-head{
+    padding:30px 38px;background:var(--forest);color:var(--ivory);
+    display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;
+  }
+  .ledger-head h3{font-family:'Fraunces',serif;font-weight:400;font-size:1.4rem}
+  .ledger-head span{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light)}
+  .row{
+    display:flex;justify-content:space-between;align-items:flex-start;gap:24px;
+    padding:24px 38px;border-bottom:1px solid var(--line);
+  }
+  .row .label{font-weight:500;font-size:1.05rem;color:var(--ink)}
+  .row .note{font-size:.86rem;color:var(--muted);margin-top:4px;max-width:42ch}
+  .row .amt{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:400;white-space:nowrap;color:var(--forest)}
+  .row.free .amt{color:var(--clay)}
+  .row.free .amt small{font-size:.74rem;letter-spacing:.04em;display:block;text-align:right;font-family:'Jost';text-transform:uppercase;color:var(--clay);font-weight:600}
+  .row.subtotal{background:var(--cream)}
+  .row.subtotal .label{font-family:'Fraunces',serif;font-size:1.15rem}
+  .row.subtotal .amt{font-size:1.7rem}
+  .ledger-foot{
+    padding:34px 38px;background:var(--forest);color:var(--ivory);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+  }
+  .ledger-foot .label{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:400}
+  .ledger-foot .label small{display:block;font-family:'Jost';font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);font-weight:500;margin-top:4px}
+  .ledger-foot .amt{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:300;color:#fff}
+
+  .takeaway{
+    margin-top:40px;padding:34px 40px;
+    border-left:3px solid var(--gold);
+    background:linear-gradient(100deg, rgba(168,133,62,.07), transparent);
+    border-radius:0 4px 4px 0;
+  }
+  .takeaway p{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:300;line-height:1.5;color:var(--forest);font-style:italic}
+  .takeaway strong{font-style:normal;font-weight:500;color:var(--clay)}
+
+  /* ---------- COMP ---------- */
+  .comps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px}
+  @media(max-width:780px){.comps{grid-template-columns:1fr}}
+  .comp{
+    padding:34px 30px;background:#fff;border:1px solid var(--line);border-radius:4px;
+    position:relative;overflow:hidden;
+  }
+  .comp::after{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--sage)}
+  .comp.hi::after{background:var(--gold)}
+  .comp .n{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:400;color:var(--forest)}
+  .comp.hi .n{color:var(--gold)}
+  .comp .d{font-size:.9rem;color:var(--muted);margin-top:8px}
+
+  /* ---------- INCLUDED / UPSIDE ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:46px}
+  @media(max-width:780px){.split{grid-template-columns:1fr}}
+  .panel{padding:40px 38px;border-radius:4px}
+  .panel.included{background:var(--forest);color:var(--ivory)}
+  .panel.upside{background:#fff;border:1px solid var(--line)}
+  .panel h4{font-family:'Fraunces',serif;font-weight:400;font-size:1.45rem;margin-bottom:8px}
+  .panel.included h4{color:#fff}
+  .panel .ph{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;margin-bottom:18px;font-weight:600}
+  .panel.included .ph{color:var(--gold-light)}
+  .panel.upside .ph{color:var(--clay)}
+  .panel ul{list-style:none}
+  .panel li{padding:13px 0;border-bottom:1px solid;font-size:1rem;display:flex;gap:14px;align-items:flex-start}
+  .panel.included li{border-color:rgba(246,241,231,.14);color:rgba(246,241,231,.9)}
+  .panel.upside li{border-color:var(--line);color:var(--ink)}
+  .panel li:last-child{border-bottom:none}
+  .mark{flex-shrink:0;font-family:'Fraunces',serif;line-height:1.4}
+  .panel.included .mark{color:var(--gold-light)}
+  .panel.upside .mark{color:var(--clay)}
+  .panel .pnote{margin-top:18px;font-size:.9rem;line-height:1.6}
+  .panel.included .pnote{color:rgba(246,241,231,.62)}
+  .panel.upside .pnote{color:var(--muted)}
+
+  /* ---------- CLOSING ---------- */
+  .close{
+    background:linear-gradient(160deg,#22382a,#172519);color:var(--ivory);
+    text-align:center;padding:110px 0;
+  }
+  .close h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.15;max-width:18ch;margin:0 auto}
+  .close h2 em{font-style:italic;color:var(--gold-light)}
+  .close .price-final{
+    margin-top:40px;font-family:'Fraunces',serif;font-size:clamp(2.8rem,7vw,4.5rem);
+    font-weight:300;color:#fff;letter-spacing:-1px;
+  }
+  .close .pf-label{font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:6px}
+  .close .softnote{margin-top:34px;font-size:.98rem;color:rgba(246,241,231,.7);max-width:46ch;margin-left:auto;margin-right:auto;font-style:italic;font-family:'Fraunces',serif;font-weight:300}
+
+  footer{background:#11200f;color:rgba(246,241,231,.5);text-align:center;padding:38px 0;font-size:.8rem;letter-spacing:.1em}
+  footer em{color:var(--gold-light);font-style:normal}
+
+  @media print{
+    .reveal{opacity:1;transform:none}
+    .hero,.close{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="fairway"></div>
+  <div class="wrap">
+    <div class="eyebrow reveal">Hacienda Pinilla · Guanacaste, Costa Rica</div>
+    <h1 class="reveal">Golf-Front on <em>Hole&nbsp;#2</em>, Priced at What It Costs to Build.</h1>
+    <p class="sub reveal">A residence in Los Almendros where the asking price barely covers the land and the construction — and the furnishings come with it.</p>
+    <div class="hero-meta reveal">
+      <div class="cell"><div class="k">Asking Price</div><div class="v">$1,200,000</div></div>
+      <div class="cell"><div class="k">Living Area</div><div class="v">3,121 sq ft</div></div>
+      <div class="cell"><div class="k">Homesite</div><div class="v">0.56 acre</div></div>
+      <div class="cell"><div class="k">Position</div><div class="v">Golf-Front</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section>
+  <div class="wrap intro-grid">
+    <div class="reveal">
+      <div class="tag">The Property</div>
+      <p class="lead">One of the best values currently available in the community.</p>
+    </div>
+    <div class="reveal">
+      <p class="copy">Positioned along the pristine fairways of Hole&nbsp;#2 within Los Almendros, this golf-front residence sits on an expansive 0.56-acre homesite — a rare combination of privacy, generous outdoor space, and effortless tropical living.</p>
+      <p class="copy">Open, airy interiors and expansive sliding glass doors connect the living spaces to the surrounding terraces and tranquil golf course views. The open-concept layout is ideal for entertaining or relaxed everyday living, with outdoor areas built for sunsets over the fairway and the year-round Guanacaste climate.</p>
+      <p class="copy">With its prime location, oversized lot, and attractive price point, it presents a compelling opportunity as a luxury residence, vacation home, or investment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE MATH -->
+<section class="math">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="tag">The Value, In Numbers</div>
+      <p class="lead">What would it cost to recreate this home from the ground up?</p>
+    </div>
+
+    <div class="ledger reveal">
+      <div class="ledger-head">
+        <h3>Replacement Cost Breakdown</h3>
+        <span>Conservative Estimate</span>
+      </div>
+
+      <div class="row">
+        <div>
+          <div class="label">Construction</div>
+          <div class="note">~300&nbsp;m² of construction at $2,000/m² — the current low end for building in Hacienda Pinilla today.</div>
+        </div>
+        <div class="amt">$600,000</div>
+      </div>
+
+      <div class="row">
+        <div>
+          <div class="label">The Lot — Golf-Front</div>
+          <div class="note">Estimated conservatively. Lots inside Almendros <em>without</em> a golf course view have recently sold for $500,000; a golf-front homesite is worth more.</div>
+        </div>
+        <div class="amt">$550,000</div>
+      </div>
+
+      <div class="row subtotal">
+        <div class="label">Land + Construction</div>
+        <div class="amt">$1,150,000</div>
+      </div>
+
+      <div class="row free">
+        <div>
+          <div class="label">Full Furniture Package</div>
+          <div class="note">Every room, ready to live in from day one.</div>
+        </div>
+        <div class="amt"><small>Included</small></div>
+      </div>
+
+      <div class="row free">
+        <div>
+          <div class="label">Kitchen Appliances</div>
+          <div class="note">Complete and conveyed with the home.</div>
+        </div>
+        <div class="amt"><small>Included</small></div>
+      </div>
+
+      <div class="row free" style="border-bottom:none">
+        <div>
+          <div class="label">Landscaping &amp; Garden</div>
+          <div class="note">Mature outdoor grounds — a real cost when building new, not counted here.</div>
+        </div>
+        <div class="amt"><small>Not Counted</small></div>
+      </div>
+
+      <div class="ledger-foot">
+        <div class="label">Asking Price<small>Furnished &amp; move-in ready</small></div>
+        <div class="amt">$1,200,000</div>
+      </div>
+    </div>
+
+    <div class="takeaway reveal">
+      <p>At $1,200,000, you are essentially buying the <strong>land and construction at cost</strong> — and the full furniture package, kitchen appliances, and established garden come along for the ride.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPS -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="tag">The Land, In Context</div>
+      <p class="lead">Why $550,000 is a careful, low estimate for the lot.</p>
+    </div>
+    <div class="comps">
+      <div class="comp reveal">
+        <div class="n">$500K</div>
+        <div class="d">Recent sale price of Almendros lots <strong>without</strong> a golf course view.</div>
+      </div>
+      <div class="comp hi reveal">
+        <div class="n">$550K</div>
+        <div class="d">Our estimate for this <strong>golf-front</strong> 0.56-acre homesite — deliberately conservative.</div>
+      </div>
+      <div class="comp reveal">
+        <div class="n">↑</div>
+        <div class="d">A true golf course view could place the lot's value <strong>higher still.</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDED + UPSIDE -->
+<section class="math">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="tag">Move-In Ready, With Room to Add</div>
+      <p class="lead">What you get today — and the easy wins that sharpen the value.</p>
+    </div>
+    <div class="split">
+      <div class="panel included reveal">
+        <div class="ph">Conveyed With the Home</div>
+        <h4>Turn the key and live</h4>
+        <ul>
+          <li><span class="mark">✦</span><span>Complete furniture package, every room</span></li>
+          <li><span class="mark">✦</span><span>Full kitchen appliances</span></li>
+          <li><span class="mark">✦</span><span>Established landscaping &amp; garden</span></li>
+          <li><span class="mark">✦</span><span>Expansive terraces &amp; outdoor living areas</span></li>
+        </ul>
+        <p class="pnote">None of this is reflected in the land-plus-construction math — it's value on top of an already low number.</p>
+      </div>
+
+      <div class="panel upside reveal">
+        <div class="ph">Light Touches · Upside</div>
+        <h4>Small refinements, big lift</h4>
+        <ul>
+          <li><span class="mark">◇</span><span>Refresh the exterior paint for a clean, current look</span></li>
+          <li><span class="mark">◇</span><span>Swap the poolside furniture — the wood has weathered in the climate</span></li>
+          <li><span class="mark">◇</span><span>A little attention to the landscaping</span></li>
+        </ul>
+        <p class="pnote">Cosmetic, straightforward improvements. With a repaint and refreshed exterior furniture, this home is positioned at an extremely strong value.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="close">
+  <div class="wrap reveal">
+    <h2>The land and the build, at cost. <em>Everything else, included.</em></h2>
+    <div style="margin-top:46px">
+      <div class="pf-label">Offered At</div>
+      <div class="price-final">$1,200,000</div>
+    </div>
+    <p class="softnote">No pressure — just sharing the numbers, so the value speaks for itself.</p>
+  </div>
+</section>
+
+<footer class="wrap" style="max-width:none">
+  <em>Los Almendros</em> &nbsp;·&nbsp; Hacienda Pinilla &nbsp;·&nbsp; Guanacaste, Costa Rica<br>
+  <span style="font-size:.72rem;opacity:.6;letter-spacing:.06em">Estimates shown are illustrative and conservative; figures are approximate and not a formal appraisal.</span>
+</footer>
+
+<script>
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transitionDelay=(Math.min(i,6)*0.08)+'s';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
